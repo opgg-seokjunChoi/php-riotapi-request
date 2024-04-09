@@ -23,17 +23,17 @@
 		public $summonerId;
 
 		/** @var string */
-		public $encryptedSummonerId;
+		public $puuid;
 
-		function __construct(Platform $platform, $encryptedSummonerId) {
+		function __construct(Platform $platform, $puuid) {
 			parent::__construct($platform);
 
-			$this->encryptedSummonerId = $encryptedSummonerId;
+			$this->puuid = $puuid;
 		}
 
 		public function getRequest() {
 			$uri = $this->platform->apiScheme . "://" . $this->platform->apiHost . "" . $this->path;
-			$uri = str_replace("{encryptedSummonerId}", $this->encryptedSummonerId, $uri);
+			$uri = str_replace("{encryptedPUUID}", $this->puuid, $uri);
 
 			return $this->getPsr7Request('GET', $uri);
 		}
